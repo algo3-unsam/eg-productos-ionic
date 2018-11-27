@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar [hidden]="mostrarBusqueda" color="primary">
+    <ion-title>Artículos</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="mostrarSearchBar()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+
+      <button [hidden]="articuloService.isWeb()" ion-button icon-only (click)="escanearBarcode()">
+        <ion-icon name="barcode"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar [hidden]="!mostrarBusqueda">
+
+    <ion-searchbar #search [animated]="true" showCancelButton (ionCancel)="ocultarSearchBar()" placeholder="Buscar artículo"
+      [(ngModel)]="articuloService.filtro" (ionInput)="articuloService.filtrarArticulos()">
+    </ion-searchbar>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let articulo of articuloService.articulosFiltrados" (click)="verDetalle(articulo)">
+      <h2><strong>{{articulo.descripcion}}</strong></h2>
+      <p>
+        <strong>P.Costo</strong> ${{articulo.precioCosto}} &emsp;
+        <strong>P.Venta</strong> ${{articulo.precioVenta}} &emsp;
+        <strong>Stock</strong> {{articulo.stock}}
+      </p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="crearArticulo()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+</ion-content>
