@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular'
 import { Searchbar, Content } from 'ionic-angular';
 import { ArticuloEditPage } from '../articuloEdit/articuloEdit'
 import { ArticuloService } from '../../services/articuloService'
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @Component({
   selector: 'page-articulos',
@@ -18,6 +19,7 @@ export class ArticulosPage {
   constructor(
     public navCtrl: NavController, 
     private articuloService: ArticuloService,
+    private barcodeScanner: BarcodeScanner
   ) {
   }
 
@@ -43,6 +45,16 @@ export class ArticulosPage {
 
   ocultarSearchBar() {
     this.mostrarBusqueda = false
+  }
+
+  escanearBarcode() {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      this.articuloService.filtro = barcodeData.text
+      this.mostrarBusqueda = true
+      this.articuloService.filtrarArticulos()
+     }, (err) => {
+      alert("Ha ocurrido un error al escanear el código")
+     })
   }
 
 }

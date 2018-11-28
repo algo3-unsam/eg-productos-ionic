@@ -11,6 +11,8 @@ import { ArticuloService } from '../services/articuloService';
 import { ArticulosPage } from '../pages/articulos/articulos';
 import { ArticuloEditPage } from '../pages/articuloEdit/articuloEdit';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -31,6 +33,7 @@ import { ArticuloEditPage } from '../pages/articuloEdit/articuloEdit';
     StatusBar,
     SplashScreen,
     ArticuloService,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

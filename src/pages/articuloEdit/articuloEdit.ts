@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ArticuloService } from '../../services/articuloService'
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @Component({
   selector: 'page-articuloEdit',
@@ -20,6 +22,7 @@ export class ArticuloEditPage {
     private articuloService: ArticuloService,
     public toastCtrl: ToastController,
     public formBuilder: FormBuilder,
+    private barcodeScanner: BarcodeScanner
   ) {
     this.articulo = navParams.get('articulo');
     this.initForm()
@@ -71,5 +74,12 @@ export class ArticuloEditPage {
     return formField == null || formField == undefined || formField == ""
   }
 
+  escanearBarcode() {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      this.articuloForm.controls.barcode.setValue(barcodeData.text)
+    }, (err) => {
+      alert("Ha ocurrido un error al escanear el código")
+    });
+  }
 
 }
