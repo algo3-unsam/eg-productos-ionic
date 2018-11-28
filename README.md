@@ -1,27 +1,16 @@
-# Versión inicial
+# Barcode Scanner
 
-Esta primera versión es el proyecto creado con el CLI de ionic sin ninguna edición.
+Agregamos comportamiento nativo a la aplicación. 
 
-## Instalamos ionic y cordova 
 
+## Instalación
+
+Instalamos el plugin a nuestra instancia de cordova: 
 ```bash
-npm install -g cordova ionic
+ionic cordova plugin add phonegap-plugin-barcodescanner
 ```
 
-## Creamos el proyecto 
-
-Para crear el proyecto utilizamos el siguiente comando: 
-
+Instalmos la dependencia en nuestro proyecto:
 ```bash
-ionic start productos-ionic sidemenu
-```
-Donde "productos-ionic" es el nombre del proyecto y "sidemenu" el template con el que arrancamos.
-
-## Corremos la app en el browser
-
-Nos posicionamos en la carpeta raíz del proyecto y levantamos la app en un server local con el siguiente comando: 
-
-```bash
-cd productos-ionic
-ionic serve
+npm install --save @ionic-native/barcode-scanner
 ```
